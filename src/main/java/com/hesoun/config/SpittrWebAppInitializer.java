@@ -18,6 +18,6 @@ public class SpittrWebAppInitializer extends AbstractAnnotationConfigDispatcherS
 
     @Override
     protected String[] getServletMappings() {
-        return new String[]{"/web"};
+        return new String[]{"/"};
     }
 }

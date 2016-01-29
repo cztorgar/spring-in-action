@@ -11,10 +11,10 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan("com.hesoun")
-public class WebConfig extends WebMvcConfigurerAdapter{
+@ComponentScan(value = {"com.hesoun.controller", "com.hesoun.dao"})
+public class WebConfig extends WebMvcConfigurerAdapter {
     @Bean
-    public ViewResolver internalResourceViewResolver(){
+    public ViewResolver internalResourceViewResolver() {
         InternalResourceViewResolver view = new InternalResourceViewResolver();
         view.setPrefix("/WEB-INF/view/");
         view.setSuffix(".jsp");
