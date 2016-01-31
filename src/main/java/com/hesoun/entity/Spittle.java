@@ -13,7 +13,7 @@ public class Spittle {
     private Double longitude;
 
     public Spittle(String message, LocalDateTime time) {
-        this(message, time, null, null);
+        this(message, time, 0d, 0d);
     }
 
     public Spittle(String message, LocalDateTime time, Double latitude, Double longitude) {

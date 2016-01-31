@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public class SpittleDaoImpl implements SpittleDao {
     @Override
-    public List<Spittle> findSpittles(long max, int count) {
+    public List<Spittle> findSpittles(Long max, Integer count) {
         //TODO change this constant Spittle list generation
         List<Spittle> spittleList = new ArrayList<Spittle>(count);
         for(int i = 0;i<count;i++){

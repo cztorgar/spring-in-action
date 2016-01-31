@@ -11,8 +11,8 @@
             <div><c:out value="${spittle.message}"/></div>
             <div>
                 <span><c:out value="${spittle.time}"/></span>
-                <span>(<c:out value="${spittle.time}"/>,
-                <c:out value="${spittle.time}"/>)
+                <span>(<c:out value="${spittle.latitude}"/>,
+                <c:out value="${spittle.longitude}"/>)
             </span>
             </div>
         </li>

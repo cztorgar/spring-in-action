@@ -25,17 +25,21 @@ public class SpittleControllerTest {
         SpittleDao dao = Mockito.mock(SpittleDao.class);
         Mockito.when(dao.findSpittles(Mockito.anyLong(),Mockito.anyInt())).thenReturn(spittleList);
 
+        Long spittleId = 500L;
+        Integer maxSpittles = 20;
+
         SpittleController controller = new SpittleController(dao);
         MockMvc mvc = MockMvcBuilders
                 .standaloneSetup(controller)
                 .setSingleView(new InternalResourceView("/WEB-INF/views/spittles.jsp"))
                 .build();
         mvc.perform(MockMvcRequestBuilders
-                .get("/spittles"))
+                .get("/spittles?count=" + spittleId + "&max=" + maxSpittles))
                 .andExpect(MockMvcResultMatchers.model()
                         .attributeExists("spittleList"))
                 .andExpect(MockMvcResultMatchers.model()
                         .attribute("spittleList", CoreMatchers.hasItems(spittleList.toArray())));
+        Mockito.verify(dao).findSpittles(spittleId,maxSpittles);
     }
 
     private List<Spittle> createSpittleList(int num) {

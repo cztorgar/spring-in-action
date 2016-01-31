@@ -12,5 +12,6 @@ import java.util.List;
  * {@code findSpittles(Integer.MAX_INT,20)}
  */
 public interface SpittleDao {
-    List<Spittle> findSpittles(long max, int count);
+    List<Spittle> findSpittles(Long max, Integer count);
 }
+
