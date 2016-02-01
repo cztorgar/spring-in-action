@@ -12,6 +12,10 @@ public class Spittle {
     private Double latitude;
     private Double longitude;
 
+    public Spittle(String message){
+        this(message,LocalDateTime.now());
+    }
+
     public Spittle(String message, LocalDateTime time) {
         this(message, time, 0d, 0d);
     }

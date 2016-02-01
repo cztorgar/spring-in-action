@@ -13,5 +13,7 @@ import java.util.List;
  */
 public interface SpittleDao {
     List<Spittle> findSpittles(Long max, Integer count);
+
+    Spittle findOne(Long spittleId);
 }
 

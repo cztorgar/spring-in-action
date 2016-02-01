@@ -5,7 +5,11 @@ import com.hesoun.dao.SpittleDao;
 import com.hesoun.entity.Spittle;
 import org.hamcrest.CoreMatchers;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -16,30 +20,52 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@RunWith(MockitoJUnitRunner.class)
 public class SpittleControllerTest {
+    @Mock
+    SpittleDao spittleDao;
+    @InjectMocks
+    SpittleController controller;
 
     @Test
-    public void testSpittleControler() throws Exception {
+    public void testLatestSpittles() throws Exception {
+        //given
         List<Spittle> spittleList = createSpittleList(20);
-
-        SpittleDao dao = Mockito.mock(SpittleDao.class);
-        Mockito.when(dao.findSpittles(Mockito.anyLong(),Mockito.anyInt())).thenReturn(spittleList);
-
-        Long spittleId = 500L;
-        Integer maxSpittles = 20;
-
-        SpittleController controller = new SpittleController(dao);
+        Mockito.when(spittleDao.findSpittles(Mockito.anyLong(), Mockito.anyInt())).thenReturn(spittleList);
+        Long maxId = 500L;
+        Integer spittleCount = 20;
         MockMvc mvc = MockMvcBuilders
                 .standaloneSetup(controller)
                 .setSingleView(new InternalResourceView("/WEB-INF/views/spittles.jsp"))
                 .build();
+
+        //when
         mvc.perform(MockMvcRequestBuilders
-                .get("/spittles?count=" + spittleId + "&max=" + maxSpittles))
+                .get("/spittles?maxId=" + maxId + "&count=" + spittleCount))
                 .andExpect(MockMvcResultMatchers.model()
                         .attributeExists("spittleList"))
                 .andExpect(MockMvcResultMatchers.model()
                         .attribute("spittleList", CoreMatchers.hasItems(spittleList.toArray())));
-        Mockito.verify(dao).findSpittles(spittleId,maxSpittles);
+        //then
+        Mockito.verify(spittleDao).findSpittles(maxId, spittleCount);
+    }
+
+    @Test
+    public void testSpittle() throws Exception {
+        //given
+        Spittle testSpittle = new Spittle("Test Spittle");
+        Long testSpittleId = 10L;
+        MockMvc mock = MockMvcBuilders.standaloneSetup(controller).build();
+        //when
+        Mockito.when(spittleDao.findOne(testSpittleId)).thenReturn(testSpittle);
+
+        //then
+        mock.perform(MockMvcRequestBuilders.get("/spittles/" + testSpittleId))
+                .andExpect(MockMvcResultMatchers.view().name("spittle"))
+                .andExpect(MockMvcResultMatchers.model().attributeExists("spittle"))
+                .andExpect(MockMvcResultMatchers.model().attribute("spittle",testSpittle));
+
+        Mockito.verify(spittleDao).findOne(Mockito.eq(testSpittleId));
     }
 
     private List<Spittle> createSpittleList(int num) {

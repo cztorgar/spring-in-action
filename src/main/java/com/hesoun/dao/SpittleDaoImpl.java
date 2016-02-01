@@ -13,9 +13,15 @@ public class SpittleDaoImpl implements SpittleDao {
     public List<Spittle> findSpittles(Long max, Integer count) {
         //TODO change this constant Spittle list generation
         List<Spittle> spittleList = new ArrayList<Spittle>(count);
-        for(int i = 0;i<count;i++){
+        for (int i = 0; i < count; i++) {
             spittleList.add(new Spittle("Spittle " + i, LocalDateTime.now()));
         }
         return spittleList;
+    }
+
+    @Override
+    public Spittle findOne(Long spittleId) {
+        //TODO change this constant Spittle generation
+        return new Spittle("Spittle with id= " + spittleId, LocalDateTime.now());
     }
 }
