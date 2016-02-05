@@ -9,6 +9,9 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
+/**
+ * @author Jakub Hesoun
+ */
 @Configuration
 @EnableWebMvc
 @ComponentScan(value = {"com.hesoun.controller", "com.hesoun.dao"})

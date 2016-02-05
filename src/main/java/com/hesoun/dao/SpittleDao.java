@@ -10,6 +10,8 @@ import java.util.List;
  *
  * E.g. to return the list of 20 most recent Spittles you can write
  * {@code findSpittles(Integer.MAX_INT,20)}
+ *
+ * @author Jakub Hesoun
  */
 public interface SpittleDao {
     List<Spittle> findSpittles(Long max, Integer count);

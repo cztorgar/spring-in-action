@@ -7,6 +7,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Jakub Hesoun
+ */
 @Repository
 public class SpittleDaoImpl implements SpittleDao {
     @Override

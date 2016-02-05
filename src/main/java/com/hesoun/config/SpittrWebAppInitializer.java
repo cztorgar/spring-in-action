@@ -4,6 +4,8 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 
 /**
  * Web configuration
+ *
+ * @author Jakub Hesoun
  */
 public class SpittrWebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
     @Override
