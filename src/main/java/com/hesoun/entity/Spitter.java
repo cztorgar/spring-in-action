@@ -1,5 +1,10 @@
 package com.hesoun.entity;
 
+
+import org.hibernate.validator.constraints.NotBlank;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.UUID;
 
 /**
@@ -8,18 +13,25 @@ import java.util.UUID;
  * @author Jakub Hesoun
  */
 public class Spitter {
+    @NotNull
     private UUID id;
+    @NotNull
+    @Size(min = 5, max = 30)
     private String username;
+    @NotBlank
     private String firstName;
+    @NotBlank
     private String lastName;
+    @NotNull
+    @Size(min = 5, max = 30)
     private String password;
 
-    //needed for Spring MVC
-    public Spitter(){
-        this(null,null,null,null);
+    //needed for Spring MVC along with getter, otherwise form fields are not mapped to the model
+    public Spitter() {
+        this(null, null, null, null);
     }
 
-    public Spitter(String username, String firstName, String lastName,String password) {
+    public Spitter(String username, String firstName, String lastName, String password) {
         this.id = UUID.randomUUID();
         this.username = username;
         this.firstName = firstName;
